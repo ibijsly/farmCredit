@@ -13,11 +13,11 @@ public class Transaction {
     private double amount;
     private Date transactionDate;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "loan_id", referencedColumnName = "id")
     private Loan loan;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "farmer_id", referencedColumnName = "id")
     private Farmer farmer;
 
