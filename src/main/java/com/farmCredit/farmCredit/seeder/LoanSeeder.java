@@ -27,6 +27,9 @@ public class LoanSeeder {
     
     public void seed(Farmer farmer){
 
+        if(loanRepository.count() > 900)
+            return;
+
         Faker faker = new Faker();
 
         HashMap<Integer, Status>  statuses = new HashMap<>();
@@ -36,7 +39,7 @@ public class LoanSeeder {
 
         Random random = new Random();
 
-        int num = 10;
+        int num = random.nextInt(10) + 5;
 
         for(int i = 0; i < num; i++){
 
