@@ -21,6 +21,8 @@ public class Transaction {
     @JoinColumn(name = "farmer_id", referencedColumnName = "id")
     private Farmer farmer;
 
+    private String repaymentMode; /*Grains, Cash*/
+
     public long getId() {
         return id;
     }
@@ -67,5 +69,13 @@ public class Transaction {
 
     public void setFarmer(Farmer farmer) {
         this.farmer = farmer;
+    }
+
+    public String getRepaymentMode() {
+        return repaymentMode;
+    }
+
+    public void setRepaymentMode(String repaymentMode) {
+        this.repaymentMode = repaymentMode;
     }
 }
