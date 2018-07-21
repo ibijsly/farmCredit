@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CooperativeRepository extends JpaRepository<Cooperative, Long> {
     public Cooperative findById(long id);
+
+    Cooperative findByName(String name);
 }

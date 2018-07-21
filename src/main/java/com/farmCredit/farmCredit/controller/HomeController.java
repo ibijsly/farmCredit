@@ -14,7 +14,7 @@ public class HomeController {
     @RequestMapping( value = {"/", "/farmcredit"}, method = GET)
     public ModelAndView landingPage(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/index");
+        modelAndView.setViewName("index");
         return modelAndView;
 
     }
@@ -51,11 +51,11 @@ public class HomeController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/createCooperative")
+    @GetMapping(value = "/createcooperative")
     public ModelAndView registerCooperative(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("errorMessage", "Invalid UserName or Password, Please Check");
-        modelAndView.setViewName("cooperative");
+        modelAndView.setViewName("createcooperative");
         return modelAndView;
     }
 
@@ -66,4 +66,7 @@ public class HomeController {
         modelAndView.setViewName("history");
         return modelAndView;
     }
+
+
+
 }

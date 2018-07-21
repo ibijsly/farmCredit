@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -25,21 +25,35 @@
     <div class="page">
       <div class="page-single">
         <div class="container">
+          <div  class="alert alert-danger alert-dismissable fade in col-md-4 col-md-offset-4" align="center" th:if="${errorMessage}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+            <h5><strong  th:text=${errorMessage}></strong></h5>
+          </div>
+
+          <div  class="alert alert-warning alert-dismissable fade in col-md-4 col-md-offset-4" align="center" th:if="${alreadyExist}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+            <h5><strong  th:text=${alreadyExist}></strong></h5>
+          </div>
+
+          <div class="alert alert-success alert-dismissable fade in col-md-4 col-md-offset-4" align="center" th:if="${success}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+            <h5><strong th:text=${success}></strong></h5>
+          </div>
           <div class="row">
             <div class="col col-login mx-auto">
               <div class="text-center mb-6">
                 <h2 class="white"><i class="fe fe-minimize-2"></i>farmCredit</h2>
               </div>
-              <form class="card" action="" method="post">
+              <form class="card" action="" th:action="@{/createcooperative}" method="post" th:object="${cooperativeForm}">
                 <div class="card-body p-6">
                   <div class="card-title">Create co-operative account</div>
                   <div class="form-group">
                     <label class="form-label">Name of Corporative</label>
-                    <input type="text" class="form-control" placeholder="co-operative">
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="co-operative">
                   </div>
                   <div class="form-group">
                     <label for="sel">State</label>
-                    <select class="form-control" id="ex">
+                    <select class="form-control" id="ex" th:field="*{state}" >
                       <option>Abia</option>
                       <option>Adamawa</option>
                       <option>Delta</option>
@@ -51,7 +65,7 @@
                     </select>
                   </div>
                   <div class="form-footer">
-                    <button type="submit" class="btn btn-primary btn-block">Create new account</button>
+                    <button type="submit" class="btn btn-primary btn-block">Register Cooperative</button>
                   </div>
                 </div>
               </form>

@@ -21,7 +21,7 @@ public class Loan {
 
     private Date paybackDate;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "farmer_id", referencedColumnName = "id")
     private Farmer farmer;
 
