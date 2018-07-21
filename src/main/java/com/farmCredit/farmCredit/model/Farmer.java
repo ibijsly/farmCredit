@@ -18,7 +18,7 @@ public class Farmer implements Serializable {
 
     private String farmState;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "cooperative_id", referencedColumnName = "id")
     private Cooperative cooperativeId;
 
