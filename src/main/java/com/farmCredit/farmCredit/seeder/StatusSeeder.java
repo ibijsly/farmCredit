@@ -14,10 +14,17 @@ public class StatusSeeder {
 
     public void seed(){
 
+        System.out.println("Entered Status Seeder");
+
         Faker faker = new Faker();
+
+        if (statusRepository.count() > 2)
+            return;
 
         statusRepository.save(new Status("DISBURSED"));
         statusRepository.save(new Status("SETTLED"));
         statusRepository.save(new Status("DEFAULTING"));
+
+
     }
 }

@@ -7,6 +7,7 @@ import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Random;
 
 @Service
@@ -31,6 +32,8 @@ public class FarmerSeeder {
             farmer.setFarmSize((1 + Math.random()) / 2 * 15);
             farmer.setFarmLocation(cooperative.getState());
             farmer.setFarmState(cooperative.getState());
+            farmer.setCooperativeId(cooperative);
+            farmer.setRegDate(new Date());
 
             farmerRepository.save(farmer);
         }

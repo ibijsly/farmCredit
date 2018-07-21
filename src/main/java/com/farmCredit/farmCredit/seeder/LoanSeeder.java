@@ -9,6 +9,7 @@ import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -35,7 +36,7 @@ public class LoanSeeder {
 
         Random random = new Random();
 
-        int num = 0;
+        int num = 10;
 
         for(int i = 0; i < num; i++){
 
@@ -50,19 +51,35 @@ public class LoanSeeder {
             loan.setStatus(statuses.get(k));
 
             if(k == 1){
-                loan.setDateCreated(new Date(LocalDateTime.now().minusMonths(random.nextInt(8)).toString()));
+                LocalDateTime ldt = LocalDateTime.now().minusMonths(random.nextInt(10) + 8);
+                Instant instant = ldt.atZone(java.time.ZoneId.systemDefault()).toInstant();
+                Date d = Date.from(instant);
+
+                loan.setDateCreated(d);
             }
             else if (k == 2){
-                Date d = new Date(LocalDateTime.now().minusMonths(random.nextInt(10) + 20).toString());
+                LocalDateTime ldt = LocalDateTime.now().minusMonths(random.nextInt(10) + 20);
+                Instant instant = ldt.atZone(java.time.ZoneId.systemDefault()).toInstant();
+                Date d = Date.from(instant);
+                LocalDateTime pdt = LocalDateTime.from(ldt);
+                pdt.plusMonths(random.nextInt(3) + 6);
+                Instant pInstant = pdt.atZone(java.time.ZoneId.systemDefault()).toInstant();
+                Date p = Date.from(pInstant);
+
                 loan.setDateCreated(d);
-                loan.setDateCreated(new Date(d.toInstant().atZone(ZoneId.systemDefault())
-                        .toLocalDate().minusMonths(-1 * random.nextInt(9)).toString()));
+                loan.setPaybackDate(p);
             }
             else{
-                Date d = new Date(LocalDateTime.now().minusMonths(random.nextInt(10) + 20).toString());
+                LocalDateTime ldt = LocalDateTime.now().minusMonths(random.nextInt(10) + 20);
+                Instant instant = ldt.atZone(java.time.ZoneId.systemDefault()).toInstant();
+                Date d = Date.from(instant);
+                LocalDateTime pdt = LocalDateTime.from(ldt);
+                pdt.plusMonths(random.nextInt(9) + 6);
+                Instant pInstant = pdt.atZone(java.time.ZoneId.systemDefault()).toInstant();
+                Date p = Date.from(pInstant);
+
                 loan.setDateCreated(d);
-                loan.setDateCreated(new Date(d.toInstant().atZone(ZoneId.systemDefault())
-                        .toLocalDate().minusMonths(-1 * random.nextInt(10) + 8).toString()));
+                loan.setPaybackDate(p);
             }
 
             loanRepository.save(loan);

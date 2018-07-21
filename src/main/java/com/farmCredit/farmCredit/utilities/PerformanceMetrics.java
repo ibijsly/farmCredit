@@ -55,4 +55,14 @@ public class PerformanceMetrics {
         return sum;
     }
 
+    public static double performanceHistory(List<Map<String, Double>> performance){
+        double sum = 0.0;
+
+        for (Map<String, Double> perf: performance){
+            sum += (perf.get("actual") / perf.get("expected"));
+        }
+
+        return sum;
+    }
+
 }

@@ -19,6 +19,7 @@ import java.util.List;
 @SpringBootApplication
 public class FarmCreditApplication {
 
+	static int callTime = 0;
 	@Autowired
 	StatusSeeder statusSeeder;
 
@@ -45,18 +46,19 @@ public class FarmCreditApplication {
 	public void seedDB(ContextRefreshedEvent refreshedEvent){
 
 		try {
-			statusSeeder.seed();
-			cooperativeSeeder.seed();
+				statusSeeder.seed();
+				cooperativeSeeder.seed();
 
-			List<Cooperative> cooperativeList = cooperativeRepository.findAll();
+				List<Cooperative> cooperativeList = cooperativeRepository.findAll();
 
-			for(Cooperative cooperative : cooperativeList)
-				farmerSeeder.seed(cooperative);
+				for (Cooperative cooperative : cooperativeList)
+					farmerSeeder.seed(cooperative);
 
-			List<Farmer> farmerList = farmerRepository.findAll();
+				List<Farmer> farmerList = farmerRepository.findAll();
 
-			for(Farmer farmer : farmerList)
-				loanSeeder.seed(farmer);
+				for (Farmer farmer : farmerList)
+					loanSeeder.seed(farmer);
+				callTime ++;
 		}
 		catch (Exception ex){
 			ex.printStackTrace();

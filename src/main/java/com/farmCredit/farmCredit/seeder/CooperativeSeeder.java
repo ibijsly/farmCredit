@@ -14,6 +14,9 @@ public class CooperativeSeeder {
 
     public void seed(){
 
+        if (cooperativeRepository.count() > 8)
+            return;
+
         Faker faker = new Faker();
         String states[] = {"OYO", "RIVERS", "KADUNA"};
 
@@ -23,8 +26,8 @@ public class CooperativeSeeder {
 
                 Cooperative cooperative = new Cooperative();
 
-                cooperative.setName(faker.company().name() + "Cooperative");
-                cooperative.setName(states[i]);
+                cooperative.setName(faker.company().name() + " Cooperative");
+                cooperative.setState(states[i]);
 
                 cooperativeRepository.save(cooperative);
             }
