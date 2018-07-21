@@ -52,4 +52,5 @@ dependencies {
 	compile('org.codehaus.jackson:jackson-mapper-asl:1.9.10')
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
 	compile group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.0.1.RELEASE'
+
 }

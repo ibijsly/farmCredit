@@ -13,8 +13,8 @@ public class Farmer implements Serializable {
     private String fullname;
     private String farmName;
     private String farmLocation;
-    private String farmSize;
-    private String averageOutput;
+    private Double farmSize;
+    private Double averageOutput;
 
     private String farmState;
 
@@ -80,19 +80,19 @@ public class Farmer implements Serializable {
         this.regDate = regDate;
     }
 
-    public String getFarmSize() {
+    public Double getFarmSize() {
         return farmSize;
     }
 
-    public void setFarmSize(String farmSize) {
+    public void setFarmSize(Double farmSize) {
         this.farmSize = farmSize;
     }
 
-    public String getAverageOutput() {
+    public Double getAverageOutput() {
         return averageOutput;
     }
 
-    public void setAverageOutput(String averageOutput) {
+    public void setAverageOutput(Double averageOutput) {
         this.averageOutput = averageOutput;
     }
 }
