@@ -59,6 +59,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/create").permitAll()
                 .antMatchers("/admin/details").permitAll()
 
+                .antMatchers("/createfarmer").permitAll()
+                .antMatchers("/createcooperative").permitAll()
+                .antMatchers("/viewcooperative").permitAll()
+                .antMatchers("/all").permitAll()
+                .antMatchers("/viewfarmers").permitAll()
+                .antMatchers("/score/farmers").permitAll()
+                .antMatchers("/score/cooperatives").permitAll()
+                .antMatchers("/history").permitAll()
+                .antMatchers("/dashboard").permitAll()
+                .antMatchers("/signup").permitAll()
+
+                .antMatchers("/farmcredit").permitAll()
+
+
+
+
+
                 .anyRequest().authenticated()
 
                 .and()

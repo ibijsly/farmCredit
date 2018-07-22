@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#4188c9">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+    <title>farmCredit</title>
+    <script src="./assets/js/require.min.js"></script>
+     <!-- Dashboard Core -->
+     <link href="./assets/css/dashboard.css" rel="stylesheet" />
+     <script src="./assets/js/dashboard.js"></script>
+     <link rel="stylesheet" href="./assets/css/app.css">
+     <!-- c3.js Charts Plugin -->
+     <link href="./assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
+     <script src="./assets/plugins/charts-c3/plugin.js"></script>
+     <!-- Google Maps Plugin -->
+     <link href="./assets/plugins/maps-google/plugin.css" rel="stylesheet" />
+     <script src="./assets/plugins/maps-google/plugin.js"></script>
+     <!-- Input Mask Plugin -->
+     <script src="./assets/plugins/input-mask/plugin.js"></script>
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <div class="header py-4">
+          <div class="container">
+            <div class="d-flex">
+              <a class="header-brand" href="/dashboard"> <i class="fe fe-minimize-2"></i>
+                farmCredit
+              </a>
+              <div class="d-flex order-lg-2 ml-auto">
+                <div class="dropdown d-none d-md-flex">
+                  <a class="nav-link icon" data-toggle="dropdown">
+                    <i class="fe fe-bell"></i>
+                    <span class="nav-unread"></span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a href="#" class="dropdown-item d-flex">
+                      <span class="avatar mr-3 align-self-center" style="background-image: url(demo/faces/male/41.jpg)"></span>
+                      <div>
+                        <strong>Nathan</strong> pushed new commit: Fix page load performance issue.
+                        <div class="small text-muted">10 minutes ago</div>
+                      </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item text-center text-muted-dark">Mark all as read</a>
+                  </div>
+                </div>
+                <div class="dropdown">
+                  <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                    <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
+                    <span class="ml-2 d-none d-lg-block">
+                      <span class="text-default">Jane Pearson</span>
+                      <small class="text-muted d-block mt-1">Administrator</small>
+                    </span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-user"></i> Profile
+                    </a>
+                    <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-settings"></i> Settings
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-help-circle"></i> Need help?
+                    </a>
+                    <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-log-out"></i> Sign out
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+                <span class="header-toggler-icon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-3 ml-auto">
+                <form class="input-icon my-3 my-lg-0">
+                  <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1">
+                  <div class="input-icon-addon">
+                    <i class="fe fe-search"></i>
+                  </div>
+                </form>
+              </div>
+              <div class="col-lg order-lg-first">
+                <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                  <li class="nav-item">
+                    <a href="./dashboard.html" class="nav-link active"><i class="fe fe-home"></i> Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/viewfarmers" class="nav-link"><span>Farmers History </span> <i class="fe fe-clock"></i></a>
+                  </li>
+                    <li class="nav-item">
+                        <a href="/viewcooperative" class="nav-link"><span>Cooperative History </span> <i class="fe fe-clock"></i></a>
+                    </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="page-header">
+              <h1 class="page-title">
+                Dashboard
+              </h1>
+            </div>
+            <div class="row row-cards">
+              <div class="col-6 col-sm-4 col-lg-4">
+                <div class="card">
+                  <div class="card-body p-3 text-center">
+                    <div class="text-right text-green">
+                      6%
+                      <i class="fe fe-chevron-up"></i>
+                    </div>
+                    <div class="h1 m-0">43</div>
+                    <div class="text-muted mb-4">Number Of Farmers</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-sm-4 col-lg-4">
+                <div class="card">
+                  <div class="card-body p-3 text-center">
+                    <div class="text-right text-red">
+                      -3%
+                      <i class="fe fe-chevron-down"></i>
+                    </div>
+                    <div class="h1 m-0">17</div>
+                    <div class="text-muted mb-4">Total number of Cooperatives</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-sm-4 col-lg-4">
+                <div class="card">
+                  <div class="card-body p-3 text-center">
+                    <div class="text-right text-green">
+                      9%
+                      <i class="fe fe-chevron-up"></i>
+                    </div>
+                    <div class="h1 m-0">7</div>
+                    <div class="text-muted mb-4">Disbursed loan Volume</div>
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+           
+            <div class="row row-cards row-deck">
+                <div class="col-lg-6">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">Performance Chart</h3>
+                      </div>
+                      <div id="chart-development-activity" style="height: 10rem"></div>
+                      <div class="table-responsive">
+                        <table class="table card-table table-striped table-vcenter">
+                          <thead>
+                            <tr>
+                              <th colspan="2">Farmer</th>
+                              <th>Credit</th>
+                              <th>Date</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="w-1"><span class="avatar" style="background-image: url(./demo/faces/male/9.jpg)"></span></td>
+                              <td>Ronald Bradley</td>
+                              <td>Grains</td>
+                              <td class="text-nowrap">May 6, 2018</td>
+                              <td class="w-1"><a href="#" class="icon"><i class="fe fe-trash"></i></a></td>
+                            </tr>
+                            <tr>
+                              <td><span class="avatar">BM</span></td>
+                              <td>Russell Gibson</td>
+                              <td>Main structure</td>
+                              <td class="text-nowrap">April 22, 2018</td>
+                              <td><a href="#" class="icon"><i class="fe fe-trash"></i></a></td>
+                            </tr>
+                             
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <script>
+                      require(['c3', 'jquery'], function(c3, $) {
+                        $(document).ready(function(){
+                          var chart = c3.generate({
+                            bindto: '#chart-development-activity', // id of chart wrapper
+                            data: {
+                              columns: [
+                                  // each columns data
+                                ['data1', 0, 5, 1, 2, 7, 5, 6, 8, 24, 7, 12, 5, 6, 3, 2, 2, 6, 30, 10, 10, 15, 14, 47, 65, 55]
+                              ],
+                              type: 'area', // default type of chart
+                              groups: [
+                                [ 'data1', 'data2', 'data3']
+                              ],
+                              colors: {
+                                'data1': tabler.colors["blue"]
+                              },
+                              names: {
+                                  // name of each serie
+                                'data1': 'Performance'
+                              }
+                            },
+                            axis: {
+                              y: {
+                                padding: {
+                                  bottom: 0,
+                                },
+                                show: false,
+                                  tick: {
+                                  outer: false
+                                }
+                              },
+                              x: {
+                                padding: {
+                                  left: 0,
+                                  right: 0
+                                },
+                                show: false
+                              }
+                            },
+                            legend: {
+                              position: 'inset',
+                              padding: 0,
+                              inset: {
+                                          anchor: 'top-left',
+                                x: 20,
+                                y: 8,
+                                step: 10
+                              }
+                            },
+                            tooltip: {
+                              format: {
+                                title: function (x) {
+                                  return '';
+                                }
+                              }
+                            },
+                            padding: {
+                              bottom: 0,
+                              left: -1,
+                              right: -1
+                            },
+                            point: {
+                              show: false
+                            }
+                          });
+                        });
+                      });
+                    </script>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Distribution Chart</h3>
+                          </div>
+                          <div class="card-body">
+                            <div id="chart-donut" style="height: 12rem;"></div>
+                          </div>
+                        </div>
+                        <script>
+                          require(['c3', 'jquery'], function(c3, $) {
+                            $(document).ready(function(){
+                              var chart = c3.generate({
+                                bindto: '#chart-donut', // id of chart wrapper
+                                data: {
+                                  columns: [
+                                      // each columns data
+                                    ['data1', 63],
+                                    ['data2', 37]
+                                  ],
+                                  type: 'donut', // default type of chart
+                                  colors: {
+                                    'data1': tabler.colors["green"],
+                                    'data2': tabler.colors["green-light"]
+                                  },
+                                  names: {
+                                      // name of each serie
+                                    'data1': 'Maximum',
+                                    'data2': 'Minimum'
+                                  }
+                                },
+                                axis: {
+                                },
+                                legend: {
+                                          show: false, //hide legend
+                                },
+                                padding: {
+                                  bottom: 0,
+                                  top: 0
+                                },
+                              });
+                            });
+                          });
+                        </script>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Farmer's Dataflow</h3>
+                          </div>
+                          <div class="card-body">
+                            <div id="chart-pie" style="height: 12rem;"></div>
+                          </div>
+                        </div>
+                        <script>
+                          require(['c3', 'jquery'], function(c3, $) {
+                            $(document).ready(function(){
+                              var chart = c3.generate({
+                                bindto: '#chart-pie', // id of chart wrapper
+                                data: {
+                                  columns: [
+                                      // each columns data
+                                    ['data1', 63],
+                                    ['data2', 44],
+                                    ['data3', 12],
+                                    ['data4', 14],
+                                    ['data5', 12]
+                                  ],
+                                  type: 'pie', // default type of chart
+                                  colors: {
+                                    'data1': tabler.colors["blue-darker"],
+                                    'data2': tabler.colors["blue"],
+                                    'data3': tabler.colors["blue-light"],
+                                    'data4': tabler.colors["blue-lighter"],
+                                    'data5': tabler.colors["blue-lighter"],
+                                  },
+                                  names: {
+                                      // name of each serie
+                                    'data1': 'Farm Productivity',
+                                    'data2': 'Performance History',
+                                    'data3': 'Payment History',
+                                    'data4': 'Credit Ratio',
+                                    'data5': 'Membership',
+                                  }
+                                },
+                                axis: {
+                                },
+                                legend: {
+                                          show: false, //hide legend
+                                },
+                                padding: {
+                                  bottom: 0,
+                                  top: 0
+                                },
+                              });
+                            });
+                          });
+                        </script>
+                      </div>
+                     
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container">
+          <div class="row align-items-center flex-row-reverse">
+            <div class="col-auto ml-lg-auto">
+              
+            </div>
+            <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+              Copyright © 2018 <a href="#">farmCredit</a>. All rights reserved.
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

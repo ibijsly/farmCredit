@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#4188c9">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+    <title>farmCredit</title>
+    <script src="./assets/js/require.min.js"></script>
+     <!-- Dashboard Core -->
+     <link href="./assets/css/dashboard.css" rel="stylesheet" />
+     <script src="./assets/js/dashboard.js"></script>
+     <link rel="stylesheet" href="./assets/css/app.css">
+     <!-- c3.js Charts Plugin -->
+     <link href="./assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
+     <script src="./assets/plugins/charts-c3/plugin.js"></script>
+     <!-- Google Maps Plugin -->
+     <link href="./assets/plugins/maps-google/plugin.css" rel="stylesheet" />
+     <script src="./assets/plugins/maps-google/plugin.js"></script>
+     <!-- Input Mask Plugin -->
+     <script src="./assets/plugins/input-mask/plugin.js"></script>
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <div class="header py-4">
+          <div class="container">
+            <div class="d-flex">
+              <a class="header-brand" href="/dashboard">
+                farmCredit
+              </a>
+              <div class="d-flex order-lg-2 ml-auto">
+                <div class="dropdown">
+                  <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                    <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
+                    <span class="ml-2 d-none d-lg-block">
+                      <span class="text-default">Jane Pearson</span>
+                      <small class="text-muted d-block mt-1">Administrator</small>
+                    </span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-user"></i> Profile
+                    </a>
+                    <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-settings"></i> Settings
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-help-circle"></i> Need help?
+                    </a>
+                    <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-log-out"></i> Sign out
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+                <span class="header-toggler-icon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-3 ml-auto">
+                <form class="input-icon my-3 my-lg-0">
+                  <input type="search" class="form-control header-search" placeholder="Search&hellip;" tabindex="1">
+                  <div class="input-icon-addon">
+                    <i class="fe fe-search"></i>
+                  </div>
+                </form>
+              </div>
+              <div class="col-lg order-lg-first">
+                <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                  <li class="nav-item">
+                    <a href="./dashboard.html" class="nav-link"><i class="fe fe-home"></i> Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <!--<a href="/history" th:href="@{/history}" class="nav-link"><span>Transaction History </span> <i class="fe fe-clock"></i></a>-->
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="page-header">
+              <h1 class="page-title">
+                Farmers List
+              </h1>
+            </div>
+            <div class="row row-cards row-deck">
+              <div class="col-12">
+                <div class="card">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                      <thead>
+                        <tr>
+                          <th class="text-center w-1"><i class="icon-people"></i></th>
+                          <th>Farmers Name</th>
+                          <th>Farm Size</th>
+                          <th class="text-center">Average Output</th>
+                          <th class="text-center">Amount</th>
+                          <th class="text-center"><i class="icon-settings"></i></th>
+                        </tr>
+                      </thead>
+                      <tbody th:each="farmer : ${totalFarmers}">
+                        <tr>
+                          <td class="text-center">
+                            <div class="avatar d-block" style="background-image: url(demo/faces/female/26.jpg)">
+                              <span class="avatar-status bg-green"></span>
+                            </div>
+                          </td>
+                          <td>
+                            <div th:text="*{farmer.fullname}"></div>
+                            <div class="small text-muted">
+                              Registered: <span th:text="*{farmer.regDate}"></span>
+                            </div>
+                          </td>
+                          <td>
+                            <span class="status-icon bg-success" th:inline="text">&#8358;</span> [[${farmer.farmSize}]]
+                          </td>
+                          <td class="text-center">
+                            <div class="mx-auto">
+                              <div  th:text="*{farmer.averageOutput}"> 0</div>
+                            </div>
+                          </td>
+                          
+                          <td class="text-center">
+                            <i class="payment payment-visa"></i>
+
+                          </td>
+                          <td class="text-center">
+                            <a class="btn btn-primary" href="/score/farmers?id=farmer.id" th:href="@{/score/farmers(id=${farmer.id})}">Credit Score</a>
+                          </td>
+                        </tr>
+                        <!--<tr>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="avatar d-block" style="background-image: url(demo/faces/female/17.jpg)">-->
+                              <!--<span class="avatar-status bg-green"></span>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<div>Michelle Schultz</div>-->
+                            <!--<div class="small text-muted">-->
+                              <!--Registered: Mar 2, 2018-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<span class="status-icon bg-warning"></span> Pending-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<i class="payment payment-googlewallet"></i>-->
+                          <!--</td>-->
+                         <!---->
+                          <!--<td class="text-center">-->
+                            <!--<div class="mx-auto chart-circle chart-circle-xs" data-value="0.0" data-thickness="3" data-color="blue">-->
+                              <!--<div class="chart-circle-value">N 100,000</div>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<button class="btn btn-primary">View </button>-->
+                          <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="avatar d-block" style="background-image: url(demo/faces/female/21.jpg)">-->
+                              <!--<span class="avatar-status bg-green"></span>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<div>Crystal Austin</div>-->
+                            <!--<div class="small text-muted">-->
+                              <!--Registered: Apr 7, 2018-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<span class="status-icon bg-danger"></span> Failed-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<i class="payment payment-mastercard"></i>-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="mx-auto chart-circle chart-circle-xs" data-value="0.96" data-thickness="3" data-color="blue">-->
+                              <!--<div class="chart-circle-value">N 4000</div>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<button class="btn btn-primary">View </button>-->
+                          <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="avatar d-block" style="background-image: url(demo/faces/male/32.jpg)">-->
+                              <!--<span class="avatar-status bg-green"></span>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<div>Douglas Ray</div>-->
+                            <!--<div class="small text-muted">-->
+                              <!--Registered: Jan 15, 2018-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<span class="status-icon bg-success"></span> Claimed-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<i class="payment payment-shopify"></i>-->
+                          <!--</td>-->
+                          <!---->
+                          <!--<td class="text-center">-->
+                            <!--<div class="mx-auto chart-circle chart-circle-xs" data-value="0.06" data-thickness="3" data-color="blue">-->
+                              <!--<div class="chart-circle-value">$ 4000</div>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<button class="btn btn-primary">View </button>-->
+                          <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="avatar d-block" style="background-image: url(demo/faces/female/12.jpg)">-->
+                              <!--<span class="avatar-status bg-green"></span>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<div>Teresa Reyes</div>-->
+                            <!--<div class="small text-muted">-->
+                              <!--Registered: Mar 4, 2018-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<span class="status-icon bg-success"></span> Claimed-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<i class="payment payment-ebay"></i>-->
+                          <!--</td>-->
+                         <!---->
+                          <!--<td class="text-center">-->
+                            <!--<div class="mx-auto chart-circle chart-circle-xs" data-value="0.36" data-thickness="3" data-color="blue">-->
+                              <!--<div class="chart-circle-value">N 40,0000</div>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="item-action dropdown">-->
+                              <!--<a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="avatar d-block" style="background-image: url(demo/faces/female/4.jpg)">-->
+                              <!--<span class="avatar-status bg-green"></span>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<div>Emma Wade</div>-->
+                            <!--<div class="small text-muted">-->
+                              <!--Registered: Mar 20, 2018-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<span class="status-icon bg-warning"></span> Pending-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<i class="payment payment-paypal"></i>-->
+                          <!--</td>-->
+                         <!---->
+                          <!--<td class="text-center">-->
+                            <!--<div class="mx-auto chart-circle chart-circle-xs" data-value="0.07" data-thickness="3" data-color="blue">-->
+                              <!--<div class="chart-circle-value">$ 50000</div>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="item-action dropdown">-->
+                              <!--<a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="avatar d-block" style="background-image: url(demo/faces/female/27.jpg)">-->
+                              <!--<span class="avatar-status bg-green"></span>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<div>Carol Henderson</div>-->
+                            <!--<div class="small text-muted">-->
+                              <!--Registered: Feb 22, 2018-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<span class="status-icon bg-danger"></span> Failed-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<i class="payment payment-visa"></i>-->
+                          <!--</td>-->
+                         <!---->
+                          <!--<td class="text-center">-->
+                            <!--<div class="mx-auto chart-circle chart-circle-xs" data-value="0.8" data-thickness="3" data-color="blue">-->
+                              <!--<div class="chart-circle-value">N 50000</div>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="item-action dropdown">-->
+                              <!--<a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="avatar d-block" style="background-image: url(demo/faces/male/20.jpg)">-->
+                              <!--<span class="avatar-status bg-green"></span>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<div>Christopher Harvey</div>-->
+                            <!--<div class="small text-muted">-->
+                              <!--Registered: Jan 22, 2018-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td>-->
+                            <!--<span class="status-icon bg-success"></span> Claimed-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<i class="payment payment-googlewallet"></i>-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="mx-auto chart-circle chart-circle-xs" data-value="0.83" data-thickness="3" data-color="blue">-->
+                              <!--<div class="chart-circle-value">$ 3,000</div>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                          <!--<td class="text-center">-->
+                            <!--<div class="item-action dropdown">-->
+                              <!--<a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>-->
+                            <!--</div>-->
+                          <!--</td>-->
+                        <!--</tr>-->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container">
+          <div class="row align-items-center flex-row-reverse">
+            <div class="col-auto ml-lg-auto">
+              
+            </div>
+            <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+              Copyright © 2018 <a href="#">farmCredit</a>. All rights reserved.
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+   
+  </body>
+</html>
