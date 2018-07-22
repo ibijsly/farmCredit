@@ -18,6 +18,9 @@ public class FarmerSeeder {
 
     public void seed(Cooperative cooperative){
 
+        if(farmerRepository.count() > 1000)
+            return;
+
         Faker faker = new Faker();
 
         Random random = new Random();

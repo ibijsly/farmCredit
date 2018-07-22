@@ -21,6 +21,8 @@ public class Loan {
 
     private Date paybackDate;
 
+    private String paymentMode;
+
     @ManyToOne
     @JoinColumn(name = "farmer_id", referencedColumnName = "id")
     private Farmer farmer;
@@ -87,5 +89,13 @@ public class Loan {
 
     public void setPayable(double payable) {
         this.payable = payable;
+    }
+
+    public String getPaymentMode() {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
     }
 }
