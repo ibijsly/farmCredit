@@ -23,5 +23,27 @@ public class CooperativeService {
         }
     }
 
+    public boolean addCooperative(Cooperative cooperative){
+        Cooperative cooperative1 = this.checkCoopreativeName(cooperative.getName());
+        if(cooperative1 == null){
+            try{
+                cooperativeRepository.save(cooperative);
+                return true;
 
+            }catch (Exception ex){
+                ex.printStackTrace();
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+
+
+    }
+
+    public Cooperative checkCoopreativeName(String name){
+        Cooperative cooperative = cooperativeRepository.findByName(name);
+        return cooperative == null ? null : cooperative;
+    }
 }
