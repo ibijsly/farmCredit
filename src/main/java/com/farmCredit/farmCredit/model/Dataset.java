@@ -16,26 +16,29 @@ public class Dataset {
     private double farmProductivity;
     private double creditRatio;
     private double cooperativeMembership;
+    private double performanceSum;
     private String status;
 
     public Dataset() {
     }
 
-    public Dataset(double performanceHistory, double paymentHistory, double farmProductivity, double creditRatio, double cooperativeMembership, String status) {
+    public Dataset(double performanceHistory, double paymentHistory, double farmProductivity, double creditRatio, double cooperativeMembership, double performanceSum , String status) {
         this.performanceHistory = performanceHistory;
         this.paymentHistory = paymentHistory;
         this.farmProductivity = farmProductivity;
         this.creditRatio = creditRatio;
         this.cooperativeMembership = cooperativeMembership;
+        this.performanceSum = performanceSum;
         this.status = status;
     }
 
-    public Dataset(double performanceHistory, double paymentHistory, double farmProductivity, double creditRatio, double cooperativeMembership) {
+    public Dataset(double performanceHistory, double paymentHistory, double farmProductivity, double creditRatio, double cooperativeMembership, double performanceSum) {
         this.performanceHistory = performanceHistory;
         this.paymentHistory = paymentHistory;
         this.farmProductivity = farmProductivity;
         this.creditRatio = creditRatio;
         this.cooperativeMembership = cooperativeMembership;
+        this.performanceSum = performanceSum;
     }
 
     public long getId() {
@@ -92,6 +95,14 @@ public class Dataset {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public double getPerformanceSum() {
+        return performanceSum;
+    }
+
+    public void setPerformanceSum(double performanceSum) {
+        this.performanceSum = performanceSum;
     }
 
     @Override

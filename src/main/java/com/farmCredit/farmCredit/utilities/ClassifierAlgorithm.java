@@ -1,16 +1,23 @@
 package com.farmCredit.farmCredit.utilities;
 
+import com.farmCredit.farmCredit.model.Dataset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
+import weka.core.Attribute;
+import weka.core.FastVector;
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 import weka.core.converters.CSVLoader;
 import weka.experiment.InstanceQuery;
 
 import java.io.*;
+import java.util.ArrayList;
 
 @Component
 public class ClassifierAlgorithm {
@@ -20,7 +27,10 @@ public class ClassifierAlgorithm {
     @Value("${app.datasource.password}") String password;
 
     public static J48 tree = null;
+    public static  Instances data = null;
+    public static Logger logger = LoggerFactory.getLogger(ClassifierAlgorithm.class);
 
+    /*Train data from a CSV file*/
     public void train(String filePath, String fileName){
         String[] options = new String[1];
         options[0] = "-U";
@@ -35,6 +45,7 @@ public class ClassifierAlgorithm {
         }
     }
 
+    /*Train data from a Database Table*/
     public void train(){
         String[] options = new String[2];
         options[0] = "-U";
@@ -43,7 +54,7 @@ public class ClassifierAlgorithm {
         tree = new J48();
         try {
             tree.setOptions(options);     // set the options
-            Instances data = readFromDatabaseTable("select cooperative_membership, credit_ratio, farm_productivity, payment_history, performance_history, status from dataset");
+            data = readFromDatabaseTable("select cooperative_membership, credit_ratio, farm_productivity, payment_history, performance_history, status from dataset");
 
             /*Randomise data before the train test split*/
             data.randomize(new java.util.Random());
@@ -58,20 +69,47 @@ public class ClassifierAlgorithm {
             Evaluation eval = new Evaluation(trainData);
             eval.evaluateModel(tree, trainData);
             eval.evaluateModel(tree, testData);
-//            System.out.println("1-NN accuracy on training data:\n" + eval.pctCorrect()/100);
-//            System.out.println("1-NN accuracy on separate test data:\n" + eval.pctCorrect()/100);
 
-            System.out.println(eval.toSummaryString("\nResults\n======\n", true));
+            logger.info("1-NN accuracy on training data: " + eval.pctCorrect()/100);
+            logger.info("1-NN accuracy on separate test data: " + eval.pctCorrect()/100);
+
+//            System.out.println(eval.toSummaryString("\nResults\n======\n", true));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void classify(long id){
+    public void classify(Dataset dataset){
         try{
-            Instances data = readFromDatabaseTable("select cooperative_membership, credit_ratio, farm_productivity, payment_history, performance_history, status from dataset where id = " + id);
 
-            System.out.println(tree.classifyInstance(data.instance(0)));
+//            ArrayList<Attribute> atts = new ArrayList<Attribute>();
+//            ArrayList<String> classVal = new ArrayList<String>();
+            FastVector atts = new FastVector();
+            ArrayList<String> classVal = new ArrayList<String>();
+            classVal.add("Credit Worthy");
+            classVal.add("Not Credit Worthy");
+
+            atts.addElement(new Attribute("cooperative_membership"));
+            atts.addElement(new Attribute("credit_ratio"));
+            atts.addElement(new Attribute("farm_productivity"));
+            atts.addElement(new Attribute("payment_history"));
+            atts.addElement(new Attribute("performance_history"));
+            atts.addElement(new Attribute("status"));
+
+            Instances dataRaw = new Instances("TestInstances", atts, 0);
+
+            double[] attribute = {dataset.getCooperativeMembership(), dataset.getCreditRatio(), dataset.getFarmProductivity(), dataset.getPaymentHistory(), dataset.getPerformanceHistory()};
+            Instance instance = new Instance(1.0, attribute);
+
+            dataRaw.add(instance);
+            dataRaw.setClassIndex(dataRaw.numAttributes() -1);
+            System.out.println(instance.toString());
+            double prediction = tree.classifyInstance(dataRaw.firstInstance());
+            System.out.println(prediction);
+            System.out.println(data.numInstances());
+//            String predictionValue = data.classAttribute().value((int) prediction);
+            System.out.println("");
+
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -122,17 +160,5 @@ public class ClassifierAlgorithm {
         data.setClassIndex(data.numAttributes() - 1);
 
         return data;
-    }
-
-    public DriverManagerDataSource getDataSource() {
-
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-        dataSource.setDriverClassName(driver);
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-
-        return dataSource;
     }
 }

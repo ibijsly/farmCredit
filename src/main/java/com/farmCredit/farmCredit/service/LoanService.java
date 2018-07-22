@@ -59,20 +59,19 @@ public class LoanService {
         double creditRatio = ((2 * creditRatioValue + creditRatioVolume) / 3.00d) * (15.00d / 100.00d);     /*This has a 15% effect on the general metrics*/
         cooperativeMembership = cooperativeMembership * (05.00d / 100.00d);     /*This takes 5% effect*/
 
-        double performanceKey = performanceHistory + paymentHistory + farmProductivity + creditRatio + cooperativeMembership;
-        LoggerFactory.getLogger(LoanService.class).info("performanceHistory: " + performanceHistory + ", farmProductivity: " + farmProductivity + ", paymentHistory: " + paymentHistory + ", cooperativeMembership: " + cooperativeMembership + ", creditRatio: " + creditRatio + ", farmerId: " + farmer.getId() );
-        LoggerFactory.getLogger(LoanService.class).info("farmerId: " + farmer.getId() + ", performanceKey: " + performanceKey);
+        double performanceSum = performanceHistory + paymentHistory + farmProductivity + creditRatio + cooperativeMembership;
+//        datasetRepository.save(new Dataset(performanceHistory, paymentHistory, farmProductivity, creditRatio, cooperativeMembership, performanceSum, performanceKey > 0.62 ? "Credit Worthy" : "Not Credit Worthy"));
 
-        datasetRepository.save(new Dataset(performanceHistory, paymentHistory, farmProductivity, creditRatio, cooperativeMembership, performanceKey > 0.62 ? "Credit Worthy" : "Not Credit Worthy"));
-        if (mode.equalsIgnoreCase("dataset"))
-            datasetRepository.save(new Dataset(performanceHistory, paymentHistory, farmProductivity, creditRatio, cooperativeMembership, performanceKey > 0.62 ? "Credit Worthy" : "Not Credit Worthy"));
-        else {
-            datasetRepository.save(new Dataset(performanceHistory, paymentHistory, farmProductivity, creditRatio, cooperativeMembership));
+        Dataset dataset = null;
+        if (mode.equalsIgnoreCase("dataset")) {
+                dataset = new Dataset(performanceHistory, paymentHistory, farmProductivity, creditRatio, cooperativeMembership, performanceSum, performanceSum > 0.62 ? "Credit Worthy" : "Not Credit Worthy");
+        }else {
+            dataset = new Dataset(performanceHistory, paymentHistory, farmProductivity, creditRatio, cooperativeMembership, performanceSum);
 
-            //            Dataset dataset = datasetRepository.findLastRecord();
-
-//            classifierAlgorithm.classify(dataset.getId());
+            classifierAlgorithm.classify(dataset);
         }
+
+        datasetRepository.save(dataset);
 
     }
 }

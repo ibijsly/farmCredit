@@ -45,27 +45,27 @@ public class FarmCreditApplication {
 		SpringApplication.run(FarmCreditApplication.class, args);
 	}
 
-//	@EventListener
-//	public void seedDB(ContextRefreshedEvent refreshedEvent){
-//
-//		try {
-//				statusSeeder.seed();
-//				cooperativeSeeder.seed();
-//
-//				List<Cooperative> cooperativeList = cooperativeRepository.findAll();
-//
-//				for (Cooperative cooperative : cooperativeList)
-//					farmerSeeder.seed(cooperative);
-//
-//				List<Farmer> farmerList = farmerRepository.findAll();
-//
-//				for (Farmer farmer : farmerList)
-//					loanSeeder.seed(farmer);
-//
-////				classifierAlgorithm.classify();
-//		}
-//		catch (Exception ex){
-//			ex.printStackTrace();
-//		}
-//	}
+	@EventListener
+	public void seedDB(ContextRefreshedEvent refreshedEvent){
+
+		try {
+				statusSeeder.seed();
+				cooperativeSeeder.seed();
+
+				List<Cooperative> cooperativeList = cooperativeRepository.findAll();
+
+				for (Cooperative cooperative : cooperativeList)
+					farmerSeeder.seed(cooperative);
+
+				List<Farmer> farmerList = farmerRepository.findAll();
+
+				for (Farmer farmer : farmerList)
+					loanSeeder.seed(farmer);
+
+//				classifierAlgorithm.classify();
+		}
+		catch (Exception ex){
+			ex.printStackTrace();
+		}
+	}
 }
