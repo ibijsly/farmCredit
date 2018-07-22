@@ -27,9 +27,9 @@ public class LoanSeeder {
     
     public void seed(Farmer farmer){
 
-        if(loanRepository.count() > 900)
-            return;
 
+        if (loanRepository.count() > 10000)
+            return;
         Faker faker = new Faker();
 
         HashMap<Integer, Status>  statuses = new HashMap<>();
@@ -59,6 +59,7 @@ public class LoanSeeder {
                 Date d = Date.from(instant);
 
                 loan.setDateCreated(d);
+                loan.setPaymentMode(Math.random() > 0.7 ? "CASH" : "PRODUCE");
             }
             else if (k == 2){
                 LocalDateTime ldt = LocalDateTime.now().minusMonths(random.nextInt(10) + 20);
@@ -71,6 +72,7 @@ public class LoanSeeder {
 
                 loan.setDateCreated(d);
                 loan.setPaybackDate(p);
+                loan.setPaymentMode(Math.random() > 0.7 ? "CASH" : "PRODUCE");
             }
             else{
                 LocalDateTime ldt = LocalDateTime.now().minusMonths(random.nextInt(10) + 20);
@@ -83,6 +85,7 @@ public class LoanSeeder {
 
                 loan.setDateCreated(d);
                 loan.setPaybackDate(p);
+                loan.setPaymentMode(Math.random() > 0.7 ? "CASH" : "PRODUCE");
             }
 
             loanRepository.save(loan);

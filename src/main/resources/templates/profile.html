@@ -37,7 +37,7 @@
           <div class="text-center mb-6 white">
             <h2><i class="fe fe-minimize-2"></i>farmCredit</h2>
           </div>
-          <div class="card">
+          <div class="card" th:object="${data}">
             <div class="card-header">
               <h2 class="card-title">Farmer's Report</h2>
             </div>
@@ -46,43 +46,43 @@
                 <tr>
                     <td>Farmers Name</td>
                     <td class="text-right">
-                        <span  th:text="*{farmerFullName}"></span>
+                        <span  th:text="${farmerFullName}"></span>
                     </td>
                 </tr>
               <tr>
-                <td>Farm Productivity</td>
-                <td class="text-right">
-                  <span class="badge badge-default">20%</span>
+                  <td>Farm Productivity</td>
+                  <td class="text-right">
+                  <span  th:text="${#numbers.formatDecimal(data.farmProductivity * 100, 1, 2)}">20%</span>
                 </td>
               </tr>
               <tr>
-                <td>Current Ratio</td>
+                <td>Credit Ratio</td>
                 <td class="text-right">
-                  <span class="badge badge-success">10%</span>
+                  <span  th:text="${#numbers.formatDecimal(data.creditRatio * 100, 1, 2)}">10%</span>
                 </td>
               </tr>
               <tr>
                 <td>Payment History</td>
                 <td class="text-right">
-                  <span class="badge badge-danger">15%</span>
+                  <span  th:text="${#numbers.formatDecimal(data.paymentHistory * 100, 1, 2)}">15%</span>
                 </td>
               </tr>
               <tr>
                 <td>Performance History</td>
                 <td class="text-right">
-                  <span class="badge badge-default">30%</span>
+                  <span  th:text="${#numbers.formatDecimal(data.performanceHistory * 100, 1, 2)}">30%</span>
                 </td>
               </tr>
               <tr>
                 <td>MemberShip</td>
                 <td class="text-right">
-                  <span class="badge badge-default">10%</span>
+                  <span  th:text="${#numbers.formatDecimal(data.cooperativeMembership * 100, 1, 2)}">10%</span>
                 </td>
               </tr>
               <tr>
                 <td>Credit Score</td>
                 <td class="text-right">
-                  <span class="badge badge-warning">80%</span>
+                  <span class="btn btn-success">80%</span>
                 </td>
               </tr>
             </table>
