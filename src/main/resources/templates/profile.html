@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Language" content="en" />
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="theme-color" content="#4188c9">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+  <!-- Generated: 2018-04-16 09:29:05 +0200 -->
+  <title>Login farmCredit</title>
+    <link href="../assets/css/dashboard.css" rel="stylesheet" />
+    <script src="../assets/js/dashboard.js"></script>
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <!-- c3.js Charts Plugin -->
+    <link href="../assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
+    <script src="../assets/plugins/charts-c3/plugin.js"></script>
+    <!-- Google Maps Plugin -->
+    <link href="../assets/plugins/maps-google/plugin.css" rel="stylesheet" />
+    <script src="../assets/plugins/maps-google/plugin.js"></script>
+    <!-- Input Mask Plugin -->
+    <script src="../assets/plugins/input-mask/plugin.js"></script>
+</head>
+<body class="theme-bg">
+<div class="page">
+  <div class="page-single">
+    <div class="container">
+      <div class="row">
+        <div class="col col-login mx-auto">
+          <div class="text-center mb-6 white">
+            <h2><i class="fe fe-minimize-2"></i>farmCredit</h2>
+          </div>
+          <div class="card" th:object="${data}">
+            <div class="card-header">
+              <h2 class="card-title">Farmer's Report</h2>
+            </div>
+
+            <table class="table card-table">
+                <tr>
+                    <td>Farmers Name</td>
+                    <td class="text-right">
+                        <span  th:text="${farmerFullName}"></span>
+                    </td>
+                </tr>
+              <tr>
+                  <td>Farm Productivity</td>
+                  <td class="text-right">
+                  <span  th:text="${#numbers.formatDecimal(data.farmProductivity * 100, 1, 2)}">20%</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Credit Ratio</td>
+                <td class="text-right">
+                  <span  th:text="${#numbers.formatDecimal(data.creditRatio * 100, 1, 2)}">10%</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Payment History</td>
+                <td class="text-right">
+                  <span  th:text="${#numbers.formatDecimal(data.paymentHistory * 100, 1, 2)}">15%</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Performance History</td>
+                <td class="text-right">
+                  <span  th:text="${#numbers.formatDecimal(data.performanceHistory * 100, 1, 2)}">30%</span>
+                </td>
+              </tr>
+              <tr>
+                <td>MemberShip</td>
+                <td class="text-right">
+                  <span  th:text="${#numbers.formatDecimal(data.cooperativeMembership * 100, 1, 2)}">10%</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Credit Score</td>
+                <td class="text-right">
+                  <span class="btn btn-success" th:text="${#numbers.formatDecimal(data.performanceSum * 100, 1, 2)}"></span>
+                </td>
+              </tr>
+
+                <tr>
+                    <td>Status</td>
+                    <td class="text-center">
+                        <span th:if="${data.status == 'Credit Worthy'} "class="btn btn-success" th:text="${data.status}"></span>
+                        <span th:if="${data.status == 'Not Credit Worthy'} "class="btn btn-danger" th:text="${data.status}"></span>
+                    </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+          <!--<div class="card">-->
+              <!--<div class="card-header">-->
+                  <!--<h3 class="card-title">Credit Behavourial Chart</h3>-->
+              <!--</div>-->
+              <!--<div id="chart-development-activity" style="height: 10rem"></div>-->
+              <!--<div class="table-responsive">-->
+                  <!--<table class="table card-table table-striped table-vcenter">-->
+                      <!--<thead>-->
+                      <!--<tr>-->
+                          <!--<th colspan="2">Farmer</th>-->
+                          <!--<th>Credit</th>-->
+                          <!--<th>Date</th>-->
+                          <!--<th></th>-->
+                      <!--</tr>-->
+                      <!--</thead>-->
+                      <!--<tbody>-->
+                      <!--<tr>-->
+                          <!--<td class="w-1"><span class="avatar" style="background-image: url(./demo/faces/male/9.jpg)"></span></td>-->
+                          <!--<td>Ronald Bradley</td>-->
+                          <!--<td>Grains</td>-->
+                          <!--<td class="text-nowrap">May 6, 2018</td>-->
+                          <!--<td class="w-1"><a href="#" class="icon"><i class="fe fe-trash"></i></a></td>-->
+                      <!--</tr>-->
+                      <!--<tr>-->
+                          <!--<td><span class="avatar">BM</span></td>-->
+                          <!--<td>Russell Gibson</td>-->
+                          <!--<td>Main structure</td>-->
+                          <!--<td class="text-nowrap">April 22, 2018</td>-->
+                          <!--<td><a href="#" class="icon"><i class="fe fe-trash"></i></a></td>-->
+                      <!--</tr>-->
+
+                      <!--</tbody>-->
+                  <!--</table>-->
+              <!--</div>-->
+          <!--</div>-->
+          <!--<script>-->
+                      <!--require(['c3', 'jquery'], function(c3, $) {-->
+                        <!--$(document).ready(function(){-->
+                          <!--var chart = c3.generate({-->
+                            <!--bindto: '#chart-development-activity', // id of chart wrapper-->
+                            <!--data: {-->
+                              <!--columns: [-->
+                                  <!--// each columns data-->
+                                <!--['data1', 0, 5, 1, 2, 7, 5, 6, 8, 24, 7, 12, 5, 6, 3, 2, 2, 6, 30, 10, 10, 15, 14, 47, 65, 55]-->
+                              <!--],-->
+                              <!--type: 'area', // default type of chart-->
+                              <!--groups: [-->
+                                <!--[ 'data1', 'data2', 'data3']-->
+                              <!--],-->
+                              <!--colors: {-->
+                                <!--'data1': tabler.colors["blue"]-->
+                              <!--},-->
+                              <!--names: {-->
+                                  <!--// name of each serie-->
+                                <!--'data1': 'Performance'-->
+                              <!--}-->
+                            <!--},-->
+                            <!--axis: {-->
+                              <!--y: {-->
+                                <!--padding: {-->
+                                  <!--bottom: 0,-->
+                                <!--},-->
+                                <!--show: false,-->
+                                  <!--tick: {-->
+                                  <!--outer: false-->
+                                <!--}-->
+                              <!--},-->
+                              <!--x: {-->
+                                <!--padding: {-->
+                                  <!--left: 0,-->
+                                  <!--right: 0-->
+                                <!--},-->
+                                <!--show: false-->
+                              <!--}-->
+                            <!--},-->
+                            <!--legend: {-->
+                              <!--position: 'inset',-->
+                              <!--padding: 0,-->
+                              <!--inset: {-->
+                                          <!--anchor: 'top-left',-->
+                                <!--x: 20,-->
+                                <!--y: 8,-->
+                                <!--step: 10-->
+                              <!--}-->
+                            <!--},-->
+                            <!--tooltip: {-->
+                              <!--format: {-->
+                                <!--title: function (x) {-->
+                                  <!--return '';-->
+                                <!--}-->
+                              <!--}-->
+                            <!--},-->
+                            <!--padding: {-->
+                              <!--bottom: 0,-->
+                              <!--left: -1,-->
+                              <!--right: -1-->
+                            <!--},-->
+                            <!--point: {-->
+                              <!--show: false-->
+                            <!--}-->
+                          <!--});-->
+                        <!--});-->
+                      <!--});-->
+                    <!--</script>-->
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

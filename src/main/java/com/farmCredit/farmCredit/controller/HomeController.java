@@ -51,13 +51,7 @@ public class HomeController {
         return modelAndView;
     }
 
-    @GetMapping(value = "/createcooperative")
-    public ModelAndView registerCooperative(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("errorMessage", "Invalid UserName or Password, Please Check");
-        modelAndView.setViewName("createcooperative");
-        return modelAndView;
-    }
+
 
     @GetMapping(value = "/history")
     public ModelAndView history(){

@@ -31,14 +31,4 @@ public class DatasetService {
             return false;
         }
     }
-
-    public void test(){
-        Random r = new Random();
-        List<Farmer> farmers = farmerRepository.findAll();
-        for (int i = 0; i < farmers.size(); i++){
-            if (farmers.get(i) == null)
-                continue;
-            loanService.getPerformance(farmers.get(i), "");
-        }
-    }
 }

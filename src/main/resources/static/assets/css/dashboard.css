@@ -10276,7 +10276,10 @@ body.fixed-header .page {
   padding-bottom: .75rem;
   background: #fff;
   /* border-bottom: 1px solid rgba(0, 40, 100, 0.12); */
-  background: linear-gradient(to right, #1488cc, #2b32b2);
+  /* background: linear-gradient(to right, #1488cc, #2b32b2); */
+  background: #eacda3;
+  background: -webkit-linear-gradient(to right, #d6ae7b, #eacda3);
+  background: linear-gradient(to right, #d6ae7b, #eacda3);
 }
 
 body.fixed-header .header {

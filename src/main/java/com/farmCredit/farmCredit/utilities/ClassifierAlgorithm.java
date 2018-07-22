@@ -111,7 +111,8 @@ public class ClassifierAlgorithm {
             System.out.println("");
 
         }catch (Exception ex){
-            ex.printStackTrace();
+//            ex.printStackTrace();
+            dataset.setStatus(dataset.getPerformanceSum() > 0.62? "Credit Worthy": "Not Credit Worthy");
         }
     }
 

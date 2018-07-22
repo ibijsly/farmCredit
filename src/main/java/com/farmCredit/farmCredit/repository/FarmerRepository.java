@@ -14,4 +14,7 @@ public interface FarmerRepository extends JpaRepository<Farmer, Long> {
     public List<Farmer> findlikeName(String name);
 
     public List<Farmer> findByCooperativeId(Cooperative cooperative);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM farmer ORDER BY ID DESC LIMIT 20")
+    public List<Farmer> findlast20agent();
 }

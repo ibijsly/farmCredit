@@ -17,9 +17,4 @@ public class DatasetController {
     public boolean populateDataset(){
         return datasetService.prepareData();
     }
-
-    @RequestMapping("/test")
-    public void test(){
-        datasetService.test();
-    }
 }

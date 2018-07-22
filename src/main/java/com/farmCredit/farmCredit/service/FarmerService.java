@@ -1,6 +1,7 @@
 package com.farmCredit.farmCredit.service;
 
 import com.farmCredit.farmCredit.model.Cooperative;
+import com.farmCredit.farmCredit.model.Dataset;
 import com.farmCredit.farmCredit.model.Farmer;
 import com.farmCredit.farmCredit.model.ResponseModel;
 import com.farmCredit.farmCredit.repository.CooperativeRepository;
@@ -13,10 +14,12 @@ import java.util.List;
 public class FarmerService {
     private final FarmerRepository farmerRepository;
     private final CooperativeRepository cooperativeRepository;
+    private final LoanService loanService;
 
-    public FarmerService(FarmerRepository farmerRepository, CooperativeRepository cooperativeRepository) {
+    public FarmerService(FarmerRepository farmerRepository, CooperativeRepository cooperativeRepository, LoanService loanService) {
         this.cooperativeRepository = cooperativeRepository;
         this.farmerRepository = farmerRepository;
+        this.loanService = loanService;
     }
 
     public ResponseModel addFarmer(Farmer farmer){
@@ -43,7 +46,7 @@ public class FarmerService {
         }
     }
 
-    public ResponseModel fetchByNmae(String name){
+    public ResponseModel fetchByName(String name){
         try {
             List<Farmer> farmers = farmerRepository.findlikeName(name);
 
@@ -71,4 +74,25 @@ public class FarmerService {
         }
 
     }
+
+
+    public List<Farmer> fetchAllFarmers() {
+
+        return farmerRepository.findlast20agent();
+    }
+
+    public Farmer findById(long id) {
+        Farmer farmer = farmerRepository.findById(id);
+        return  farmer;
+    }
+
+    public Dataset test(long id){
+        Farmer farmer = farmerRepository.findById(id);
+            if (farmer == null)
+                return null;
+            return loanService.getPerformance(farmer, "");
+
+    }
+
+
 }

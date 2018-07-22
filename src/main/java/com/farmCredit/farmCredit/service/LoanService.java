@@ -24,7 +24,7 @@ public class LoanService {
         this.classifierAlgorithm = classifierAlgorithm;
     }
 
-    public void getPerformance(Farmer farmer, String mode){
+    public Dataset getPerformance(Farmer farmer, String mode){
 
         Long totalLoanVolume = loanRepository.getTotalCount(farmer.getId());
         totalLoanVolume = (totalLoanVolume != null) ? totalLoanVolume : 0L;
@@ -73,5 +73,7 @@ public class LoanService {
 
         datasetRepository.save(dataset);
 
+        return dataset;
     }
+
 }

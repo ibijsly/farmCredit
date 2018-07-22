@@ -14,7 +14,7 @@
     <meta name="MobileOptimized" content="320">
     <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
-    <title>edgePay</title>
+    <title>farmCredit</title>
     <!-- Dashboard Core -->
     <link href="./assets/css/dashboard.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/app.css">
@@ -27,7 +27,7 @@
           <div class="container">
             <div class="d-flex">
               <a class="header-brand" href="./index.html">
-                edgePay
+                farmCredit
               </a>
               <div class="d-flex order-lg-2 ml-auto">
                 <div class="dropdown d-none d-md-flex">
@@ -95,13 +95,13 @@
                     <a href="./dashboard.html" class="nav-link"><i class="fe fe-home"></i> Home</a>
                   </li>
                   <li class="nav-item">
-                    <a href="./history.html" class="nav-link active"><span>Transaction History </span> <i class="fe fe-clock"></i></a>
+                    <!--<a href="/history" th:href="@{/history}" class="nav-link active"><span>Transaction History </span> <i class="fe fe-clock"></i></a>-->
                   </li>
                   <li class="nav-item">
-                    <a href="./send.html" class="nav-link">Send Money  <i class="fe fe-send"></i></a>
+                    <a href="/viewfarmers" th:href="@{/viewfarmers}" class="nav-link">Farmers <i class="fe fe-send"></i></a>
                   </li>
                   <li class="nav-item">
-                    <a href="./receive.html" class="nav-link">Receive Money <i class="fe fe-arrow-down-left"></i></a>
+                    <a href="/viewcooperative"  th:href="@{/viewcooperative}" class="nav-link">Co-operatives  <i class="fe fe-arrow-down-left"></i></a>
                   </li>
                 </ul>
               </div>
@@ -614,7 +614,7 @@
               
             </div>
             <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
-              Copyright © 2018 <a href="#">edgePay</a>. All rights reserved.
+              Copyright © 2018 <a href="#">farmCredit</a>. All rights reserved.
             </div>
           </div>
         </div>
